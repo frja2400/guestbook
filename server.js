@@ -53,6 +53,20 @@ app.post("/", (req, res) => {
     res.redirect("/");
 });
 
+//Radera inlägg
+app.get("/delete/:id", (req, res) => {
+    let id = req.params.id;
+
+    db.run("DELETE FROM guestbook WHERE id=?;", id, (err) => {
+        if (err) {
+            console.error(err.message);
+        }
+
+        //Redirect till startsida
+        res.redirect("/");
+    });
+});
+
 //Starta applikationen.
 //Startar servern och lyssnar på den angivna porten (3000). Loggar ett meddelande när servern har startat.
 app.listen(port, () => {

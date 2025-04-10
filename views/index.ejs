@@ -40,6 +40,9 @@
                         <p>
                             Postad av <%= row.name %>, den <%= row.posted %>
                         </p>
+                        <p>
+                            <a href="/delete/<%= row.id %>">Radera kommentar</a>
+                        </p>
                     </article>
                     <% }); %>
                         <% } %>
