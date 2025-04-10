@@ -19,3 +19,9 @@ textarea {
     height: 10em;
     width: 70%;
 }
+
+article {
+    border: 1px solid #CCC;
+    padding: 1em;
+    margin-bottom: 1em;
+}

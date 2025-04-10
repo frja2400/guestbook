@@ -17,10 +17,20 @@ app.set("view engine", "ejs");                                  //Anger ejs som 
 app.use(express.static("public"));                              //Konfigurerar Express att använda statiska filer från public-mappen.
 app.use(bodyParser.urlencoded({ extended: true }));             //Använder body-parser för att hantera URL-encoded data.
 
-//Definierar en route för root-URL (/) som renderar index.ejs-filen.
+//Detta definierar en route för root-URL ("/"). När någon besöker denna URL, kommer den här funktionen att köras.
 app.get("/", (req, res) => {
-    res.render("index", {
-        error: ""
+    //Denna rad kör en SQL-fråga som hämtar alla rader från tabellen "guestbook". Resultatet av frågan skickas till callback-funktionen.
+    db.all("SELECT * FROM guestbook ORDER BY id DESC;", (err, rows) => {
+        //Här kontrolleras om det uppstod ett fel när SQL-frågan kördes.
+        if (err) {
+            console.error(err.message);
+        }
+        //Denna rad renderar "index.ejs"-filen och skickar med ett objekt med data till vyn.
+        res.render("index", {
+            //Här skickas en tom sträng som värde för "error"-nyckeln i objektet som skickas till vyn.
+            error: "",
+            rows: rows
+        });
     });
 });
 
@@ -40,9 +50,7 @@ app.post("/", (req, res) => {
         error = "Du måste fylla i både namn och meddelande!"
     }
 
-    res.render("index", {
-        error: error
-    });
+    res.redirect("/");
 });
 
 //Starta applikationen.
