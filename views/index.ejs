@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gästbok</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <h1>Gästbok</h1>
+
+            <form method="post">
+                <% if(error != "") { %>
+                    <p><%= error %></p>
+                <% } %>
+                <label for="name">Namn:</label>
+                <br>
+                <input type="text" id="name" name="name">
+                <br>
+                <label for="message">Meddelande:</label>
+                <br>
+                <textarea name="message" id="message"></textarea>
+                <br>
+                <input type="submit" value="Posta kommentar">
+            </form>
+        </main>
+    </div>
+</body>
+</html>
